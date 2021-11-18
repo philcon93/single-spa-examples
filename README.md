@@ -3,3 +3,6 @@
 - React
 - Vanilla JS
 - Vue
+
+- Root Config
+- Navigation
