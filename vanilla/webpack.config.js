@@ -1,17 +1,14 @@
 const { mergeWithRules } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa");
 
-module.exports = (webpackConfigEnv, argv) => {
-  const orgName = "outfit";
+module.exports = (webpackConfigEnv) => {
   const defaultConfig = singleSpaDefaults({
-    orgName,
+    orgName: "outfit",
     projectName: "vanilla",
-    webpackConfigEnv,
-    argv,
-    disableHtmlGeneration: true,
+    webpackConfigEnv
   });
 
-  return mergeWithRules({
+  const config = mergeWithRules({
     module: {
       rules: {
         test: "match",
@@ -19,12 +16,12 @@ module.exports = (webpackConfigEnv, argv) => {
       },
     },
   })(defaultConfig, {
+    // customize the webpack config here
     module: {
       rules: [
         {
           test: /\.css$/i,
           use: [
-            // Use require.resolve to ensure the correct loader is used
             require.resolve("style-loader", {
               paths: [require.resolve("webpack-config-single-spa")],
             }),
@@ -36,5 +33,7 @@ module.exports = (webpackConfigEnv, argv) => {
         },
       ],
     },
-  })
+  });
+
+  return config;
 };

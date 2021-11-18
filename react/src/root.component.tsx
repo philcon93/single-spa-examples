@@ -1,5 +1,5 @@
 import { OutfitProvider, useOutfit } from '@outfit.io/react';
-import { Styles } from './styles';
+import { AppPage, AppHeader, AppLogo, GlobalStyle } from './styles';
 
 const Page = () => {
   const { account, team, user, inputs } = useOutfit();
@@ -13,15 +13,12 @@ const Page = () => {
   }
 
   return (
-    <>
-    <Styles />
-    <div className="App">
-      <header className="App-header">
-        <img className="App-logo" alt="logo" src="https://outfit-website.vercel.app/burst.svg"/>
+    <AppPage>
+      <AppHeader>
+        <AppLogo alt="logo" src="https://outfit-website.vercel.app/burst.svg"/>
         <p>{inputs.text}</p>
-      </header>
-    </div>
-    </>
+      </AppHeader>
+    </AppPage>
   );
 };
 
@@ -34,6 +31,7 @@ declare global {
 export default function App ({ templateProps = window.payload }){
   return (
     <OutfitProvider templateProps={templateProps}>
+      <GlobalStyle />
       <Page />
     </OutfitProvider>
   );
