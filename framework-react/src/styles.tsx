@@ -42,7 +42,6 @@ const spin = keyframes`
     }
 `;
 
-// Here we create a component that will rotate everything we pass in over two seconds
 export const AppLogo = styled.img`
     height: 40vmin;
     pointer-events: none;
