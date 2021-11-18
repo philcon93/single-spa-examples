@@ -1,8 +1,8 @@
 {
   "name": "@outfit/react",
   "scripts": {
-    "start": "webpack serve",
-    "start:standalone": "webpack serve --env standalone",
+    "start": "webpack serve --port 9002",
+    "start:standalone": "webpack serve --port 9002 --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
@@ -11,7 +11,6 @@
     "check-format": "prettier --check .",
     "test": "cross-env BABEL_ENV=test jest",
     "watch-tests": "cross-env BABEL_ENV=test jest --watch",
-    "prepare": "husky install",
     "coverage": "cross-env BABEL_ENV=test jest --coverage",
     "build:types": "tsc"
   },

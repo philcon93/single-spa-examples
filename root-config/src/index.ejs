@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React Microfrontends</title>
+    <meta name="importmap-type" content="systemjs-importmap" />
+    <script type="systemjs-importmap">
+        {
+            "imports": {
+                "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.3/lib/system/single-spa.min.js",
+                "react": "https://cdn.jsdelivr.net/npm/react@17.0.1/umd/react.production.min.js",
+                "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@17.0.1/umd/react-dom.production.min.js",
+                "@react-mf/root-config": "https://unpkg.com/@philcon93/root-config@0.0.4/dist/react-mf-root-config.js",
+                "@react-mf/ui-people": "https://unpkg.com/@philcon93/ui-people@0.0.2/dist/react-mf-ui-people.js"
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+    <script>
+        window.routes = [
+            {
+                application: '@react-mf/ui-people',
+                renders: [
+                    { name: 'UI Template' }
+                ]
+            }
+        ];
+    </script>
+</head>
+<body>
+    <div id="react-container"></div>
+    <script>
+        System.import('@react-mf/root-config');
+    </script>
+    <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+</body>
+</html>
