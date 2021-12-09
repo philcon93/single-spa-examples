@@ -2,11 +2,23 @@ const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-module.exports = (webpackConfigEnv, argv) => {
-  const orgName = "react-mf";
+const OUTPUT_DATA = [
+  {
+    orgName: "single-spa",
+    projectName: "root-config",
+    template: "src/index.ejs",
+  },
+  {
+    orgName: "single-spa",
+    projectName: "root-config-layout",
+    template: "src/index-layout.ejs",
+  }
+];
+
+const config = OUTPUT_DATA.map(({ orgName, projectName, template }) => (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
     orgName,
-    projectName: "root-config",
+    projectName,
     webpackConfigEnv,
     argv,
     disableHtmlGeneration: true,
@@ -18,7 +30,7 @@ module.exports = (webpackConfigEnv, argv) => {
       plugins: [
         new HtmlWebpackPlugin({
           inject: false,
-          template: "src/index.ejs",
+          template,
           templateParameters: {
             isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
             orgName,
@@ -30,4 +42,6 @@ module.exports = (webpackConfigEnv, argv) => {
       // modify the webpack config however you'd like to by adding to this object
     }
   );
-};
+});
+
+module.exports = config;
